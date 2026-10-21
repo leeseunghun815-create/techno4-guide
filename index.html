@@ -6,120 +6,191 @@
 <meta name="robots" content="noindex,nofollow">
 <title>테크노4 예비입주 신청 가이드</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
 <style>
-/* Layout: 한 줄 세로 흐름(모바일 우선) — 상단 D-day 띠, 일정 타임라인, 단계 카드, 표, 체크리스트 */
+/* Layout: 단일 열 브로슈어 — 짙은 표지 카드(설계도 격자) → 고정 목차 칩 → 세리프 제목의 섹션들 */
 :root{
-  --bg:#f5f7f6; --surface:#ffffff; --fg:#1b2422; --muted:#5b6865; --line:#dbe2df;
-  --accent:#16675a; --accent-soft:#e2f0ec; --warn:#b4471f; --warn-soft:#fbeae2; --info-soft:#eef2f8;
+  --bg:#f3f4f1; --surface:#ffffff; --surface-2:#eceeea; --fg:#17211f; --muted:#5b6864; --line:#dde2dc;
+  --ink:#10201c; --ink-fg:#eef3ef; --ink-muted:#a9bab3; --ink-line:rgba(238,243,239,.14);
+  --accent:#1c5d51; --accent-soft:#e1ede8; --brass:#9a7330; --brass-hi:#d2ae6b; --warn:#a03f1b; --warn-soft:#f7ebe4; --info-soft:#ebf0f2;
+  --shadow:0 1px 2px rgba(16,32,28,.05),0 6px 20px -12px rgba(16,32,28,.18);
+  --f-display:"Noto Serif KR","Nanum Myeongjo",Batang,serif;
   --f-body:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
-  --f-num:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+  --f-num:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --r:14px;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#111816; --surface:#18211f; --fg:#e4ebe8; --muted:#9aa8a4; --line:#2b3633;
-  --accent:#5cc2ad; --accent-soft:#1b3330; --warn:#f08a62; --warn-soft:#3a2219; --info-soft:#1c2430; color-scheme:dark}}
+  --bg:#0c1211; --surface:#131b19; --surface-2:#18221f; --fg:#e2eae6; --muted:#95a39e; --line:#24302c;
+  --ink:#13211d; --ink-fg:#eef3ef; --ink-muted:#9fb1aa; --ink-line:rgba(238,243,239,.12);
+  --accent:#69c2ab; --accent-soft:#17302a; --brass:#d2ae6b; --brass-hi:#d2ae6b; --warn:#ef8f68; --warn-soft:#321f18; --info-soft:#172128;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px -14px rgba(0,0,0,.6); color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#111816; --surface:#18211f; --fg:#e4ebe8; --muted:#9aa8a4; --line:#2b3633;
-  --accent:#5cc2ad; --accent-soft:#1b3330; --warn:#f08a62; --warn-soft:#3a2219; --info-soft:#1c2430; color-scheme:dark}
+  --bg:#0c1211; --surface:#131b19; --surface-2:#18221f; --fg:#e2eae6; --muted:#95a39e; --line:#24302c;
+  --ink:#13211d; --ink-fg:#eef3ef; --ink-muted:#9fb1aa; --ink-line:rgba(238,243,239,.12);
+  --accent:#69c2ab; --accent-soft:#17302a; --brass:#d2ae6b; --brass-hi:#d2ae6b; --warn:#ef8f68; --warn-soft:#321f18; --info-soft:#172128;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px -14px rgba(0,0,0,.6); color-scheme:dark}
 *{box-sizing:border-box}
-body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15px;line-height:1.65;
-  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 48px}
-.wrap{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 64px)}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15.5px;line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:16px 56px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:40px}
 h1,h2,h3{text-wrap:balance;margin:0;line-height:1.3}
-h1{font-size:1.6rem;font-weight:700}
-h2{font-size:1.15rem;font-weight:700;display:flex;align-items:baseline;gap:8px}
-h2 small{font-weight:500;color:var(--muted);font-size:.8rem}
+h2{font-family:var(--f-display);font-size:1.38rem;font-weight:700;letter-spacing:-.01em;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px}
+h2 small{font-family:var(--f-body);font-weight:500;color:var(--muted);font-size:.78rem;letter-spacing:.02em}
+h3{font-size:1rem;font-weight:600}
 p{margin:0}
-.num{font-family:var(--f-num);font-variant-numeric:tabular-nums}
+b,strong{font-weight:600}
+img{max-width:100%}
+.num{font-family:var(--f-num);font-variant-numeric:tabular-nums;font-feature-settings:"tnum"}
 .muted{color:var(--muted)}
-.eyebrow{font-size:.75rem;letter-spacing:.06em;color:var(--accent);font-weight:600}
-section{display:flex;flex-direction:column;gap:12px}
-header{display:flex;flex-direction:column;gap:8px}
-.disclaimer{font-size:.8rem;color:var(--muted)}
+a{color:var(--accent);text-underline-offset:3px}
+section{display:flex;flex-direction:column;gap:14px;min-width:0}
+section > h2::before{content:"";display:block;flex-basis:100%;height:1px;background:var(--line);margin-bottom:22px}
 
-.dday{background:var(--accent);color:var(--bg);border-radius:12px;padding:14px 16px;display:flex;flex-wrap:wrap;gap:6px 16px;align-items:baseline}
-.dday b{font-size:1.25rem}
-.dday .num{font-weight:600}
+/* 표지 */
+.hero{position:relative;overflow:hidden;background:var(--ink);color:var(--ink-fg);border:1px solid var(--ink-line);border-radius:20px;padding:30px 24px 22px;display:flex;flex-direction:column;gap:14px;box-shadow:var(--shadow)}
+.hero-grid{position:absolute;inset:0;pointer-events:none;opacity:.6;
+  background-image:linear-gradient(var(--ink-line) 1px,transparent 1px),linear-gradient(90deg,var(--ink-line) 1px,transparent 1px);
+  background-size:28px 28px;
+  -webkit-mask-image:radial-gradient(120% 90% at 100% 0%,#000 0%,transparent 70%);mask-image:radial-gradient(120% 90% at 100% 0%,#000 0%,transparent 70%)}
+.hero > *{position:relative}
+.hero .eyebrow{font-size:.74rem;letter-spacing:.08em;color:var(--brass-hi);font-weight:600}
+.hero h1{font-family:var(--f-display);font-weight:700;font-size:clamp(1.7rem,6vw,2.35rem);letter-spacing:-.02em;line-height:1.22}
+.hero h1 span{display:block;font-weight:400;font-size:.62em;color:var(--ink-muted);margin-top:6px;letter-spacing:0}
+.hero .lede{color:var(--ink-muted);font-size:.95rem;max-width:52ch}
+.hero .eyebrow span{white-space:nowrap}
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:6px 0 0;border-top:1px solid var(--ink-line);border-bottom:1px solid var(--ink-line)}
+.facts div{padding:12px 4px 12px 12px;border-left:1px solid var(--ink-line);min-width:0}
+.facts div:first-child{border-left:0;padding-left:0}
+.facts dt{font-size:.7rem;letter-spacing:.06em;color:var(--ink-muted)}
+.facts dd{margin:2px 0 0;font-family:var(--f-display);font-size:1.12rem;font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums}
+@media (max-width:520px){.facts{grid-template-columns:repeat(2,minmax(0,1fr))}.facts div:nth-child(3){border-left:0;padding-left:0}.facts div:nth-child(n+3){border-top:1px solid var(--ink-line)}}
+.dday{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;font-size:.9rem}
+.dday .dot{width:8px;height:8px;border-radius:50%;background:var(--brass-hi);box-shadow:0 0 0 4px rgba(210,174,107,.18);flex:none}
+.dday b{font-weight:600;flex:1 1 220px;min-width:0}
+.dday .num{background:var(--brass-hi);color:#10201c;font-weight:600;font-size:.82rem;padding:3px 10px;border-radius:99px}
+.disclaimer{font-size:.76rem;color:var(--ink-muted);opacity:.85}
 
-.tl{list-style:none;margin:0;padding:0;border-left:2px solid var(--line);display:flex;flex-direction:column;gap:14px}
-.tl li{position:relative;padding-left:18px}
-.tl li::before{content:"";position:absolute;left:-7px;top:.45em;width:12px;height:12px;border-radius:50%;background:var(--surface);border:2px solid var(--accent)}
-.tl li.hot::before{background:var(--accent)}
-.tl .when{font-family:var(--f-num);font-size:.85rem;color:var(--accent);font-weight:600}
+/* 목차 */
+.toc{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;margin:-24px 0 -16px;padding:10px 0;background:var(--bg);background:color-mix(in srgb,var(--bg) 88%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.toc-in{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:2px}
+.toc-in::-webkit-scrollbar{display:none}
+.toc a{flex:none;text-decoration:none;color:var(--fg);font-size:.82rem;font-weight:500;padding:6px 12px;border-radius:99px;border:1px solid var(--line);background:var(--surface)}
+.toc a:hover{border-color:var(--accent);color:var(--accent)}
+.toc a.on{background:var(--accent);border-color:var(--accent);color:var(--surface)}
+.toc a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* 일정 */
+.tl{list-style:none;margin:0;padding:4px 0 0;display:flex;flex-direction:column}
+.tl li{position:relative;display:grid;grid-template-columns:minmax(0,10rem) minmax(0,1fr);gap:2px 18px;padding:0 0 18px 22px}
+.tl li::before{content:"";position:absolute;left:4px;top:.55em;bottom:-.3em;width:1px;background:var(--line)}
+.tl li:last-child::before{display:none}
+.tl li::after{content:"";position:absolute;left:0;top:.42em;width:9px;height:9px;border-radius:50%;background:var(--surface);border:1.5px solid var(--muted)}
+.tl li.hot::after{background:var(--accent);border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
+.tl .when{grid-row:span 2;font-size:.86rem;color:var(--muted);font-weight:500;font-variant-numeric:tabular-nums;padding-top:1px}
+.tl li.hot .when{color:var(--accent);font-weight:600}
 .tl .what{font-weight:600}
+.tl .what + .muted{grid-column:2;font-size:.88rem}
+@media (max-width:560px){.tl li{grid-template-columns:1fr}.tl .when{grid-row:auto}.tl .what + .muted{grid-column:1}}
 
-.steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;counter-reset:s}
-.steps li{counter-increment:s;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px 12px 52px;position:relative}
-.steps li::before{content:counter(s);position:absolute;left:14px;top:12px;width:26px;height:26px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font-family:var(--f-num);font-weight:600;display:grid;place-items:center;font-size:.85rem}
+/* 단계 */
+.steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;counter-reset:s;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
+.steps li{counter-increment:s;padding:14px 16px 14px 60px;position:relative;border-top:1px solid var(--line)}
+.steps li:first-child{border-top:0}
+.steps li::before{content:counter(s);position:absolute;left:16px;top:13px;width:28px;height:28px;border-radius:50%;border:1px solid var(--accent);color:var(--accent);font-family:var(--f-display);font-weight:700;display:grid;place-items:center;font-size:.9rem}
 .steps b{display:block}
 .steps span{color:var(--muted);font-size:.9rem}
 
-.note{border-radius:10px;padding:12px 14px;font-size:.92rem}
-.note.warn{background:var(--warn-soft)}
-.note.warn strong{color:var(--warn)}
+/* 안내 상자 */
+.note{border-radius:var(--r);padding:14px 16px;font-size:.93rem;border:1px solid transparent}
+.note.warn{background:var(--warn-soft);border-color:color-mix(in srgb,var(--warn) 22%,transparent)}
+.note.warn strong{color:var(--warn);margin-right:4px}
 .note.info{background:var(--info-soft)}
 .note.ok{background:var(--accent-soft)}
-.note ul{margin:6px 0 0;padding-left:1.1em}
+.note ul{margin:6px 0 0;padding-left:1.1em;display:flex;flex-direction:column;gap:4px}
 
-.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
-table{border-collapse:collapse;width:100%;min-width:520px;font-size:.9rem}
-th,td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+/* 표 */
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);box-shadow:var(--shadow)}
+table{border-collapse:collapse;width:100%;min-width:540px;font-size:.92rem}
+th,td{padding:12px 14px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
 th:first-child,td:first-child{text-align:left}
-th{font-size:.78rem;color:var(--muted);font-weight:600;background:var(--bg)}
-tr:last-child td{border-bottom:0}
+th{font-size:.74rem;letter-spacing:.04em;color:var(--muted);font-weight:600;background:var(--surface-2)}
+tbody tr:last-child td{border-bottom:0}
 td.num{font-family:var(--f-num)}
-.pill{display:inline-block;font-size:.72rem;padding:1px 8px;border-radius:99px;background:var(--accent-soft);color:var(--accent);font-weight:600;margin-left:4px}
 
-.check{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
-.check label{display:flex;gap:10px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px;cursor:pointer}
-.check input{margin-top:.3em;accent-color:var(--accent);width:18px;height:18px;flex:none}
-.check input:checked + span{color:var(--muted);text-decoration:line-through}
-.check .tag{font-size:.72rem;color:var(--warn);font-weight:600;margin-left:4px}
+/* 체크리스트 */
+.check{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.check label{display:flex;gap:12px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;cursor:pointer;transition:border-color .15s}
+.check label:hover{border-color:var(--accent)}
+.check input{-webkit-appearance:none;appearance:none;margin:.2em 0 0;width:20px;height:20px;flex:none;border:1.5px solid var(--muted);border-radius:6px;display:grid;place-items:center;background:var(--surface);cursor:pointer}
+.check input::after{content:"";width:10px;height:5px;border-left:2px solid var(--surface);border-bottom:2px solid var(--surface);transform:rotate(-45deg) translate(1px,-1px);opacity:0}
+.check input:checked{background:var(--accent);border-color:var(--accent)}
+.check input:checked::after{opacity:1}
+.check input:checked + span{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--muted)}
+.check .tag{font-size:.7rem;color:var(--warn);font-weight:600;margin-left:4px;border:1px solid currentColor;border-radius:99px;padding:0 7px;vertical-align:1px;white-space:nowrap}
 .check label:focus-within{outline:2px solid var(--accent);outline-offset:2px}
+.check.plain li{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px 12px 34px;position:relative}
+.check.plain li::before{content:"";position:absolute;left:15px;top:1.3em;width:6px;height:6px;border-radius:50%;background:var(--brass)}
 
-.addr{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:var(--surface);border:1px dashed var(--accent);border-radius:10px;padding:12px 14px}
+.addr{display:flex;flex-wrap:wrap;gap:10px;align-items:center;background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--brass);border-radius:12px;padding:14px 16px}
 .addr p{flex:1 1 240px;min-width:0}
-button{font:inherit;font-size:.85rem;border:1px solid var(--accent);background:transparent;color:var(--accent);border-radius:8px;padding:6px 12px;cursor:pointer}
+button{font:inherit;font-size:.85rem;font-weight:500;border:1px solid var(--accent);background:transparent;color:var(--accent);border-radius:99px;padding:6px 14px;cursor:pointer;transition:background .15s,color .15s}
+button:hover{background:var(--accent-soft)}
 button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 
-.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:6px;min-width:0}
-.card h3{font-size:.98rem}
-.card p{font-size:.9rem}
-.tel{font-family:var(--f-num);font-weight:600;color:var(--accent);user-select:all}
-a{color:var(--accent)}
-footer{font-size:.8rem;color:var(--muted);border-top:1px solid var(--line);padding-top:14px;display:flex;flex-direction:column;gap:4px}
-.seg{display:flex;gap:6px;flex-wrap:wrap}
-.seg button[aria-selected="true"]{background:var(--accent);color:var(--bg)}
-.plan{display:flex;flex-direction:column;gap:12px}
+/* 카드 */
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.card h3{font-family:var(--f-display);font-size:1.02rem;font-weight:700}
+.card p{font-size:.92rem}
+.tel{font-family:var(--f-num);font-weight:600;font-size:1.15rem;color:var(--accent);-webkit-user-select:all;user-select:all}
+
+/* 평면도 */
+.seg{display:inline-flex;gap:2px;padding:3px;border-radius:99px;background:var(--surface-2);border:1px solid var(--line);align-self:flex-start}
+.seg button{border:0;border-radius:99px;padding:6px 18px;color:var(--muted);font-weight:600;letter-spacing:.02em}
+.seg button:hover{background:transparent;color:var(--fg)}
+.seg button[aria-selected="true"]{background:var(--surface);color:var(--fg);box-shadow:var(--shadow)}
+.plan{display:flex;flex-direction:column;gap:14px}
 .plan-sum{font-size:.95rem}
-.plan-body{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:12px;align-items:start}
-@media (max-width:560px){.plan-body{grid-template-columns:1fr}}
-figure{margin:0;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.plan-sum b{font-family:var(--f-display)}
+.plan-body{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(0,1fr);gap:14px;align-items:start}
+@media (max-width:600px){.plan-body{grid-template-columns:1fr}}
+figure{margin:0;background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow)}
 figure img{display:block;width:100%;height:auto}
-figcaption{font-size:.78rem;color:#5b6865;padding:6px 10px;border-top:1px solid #e3e8e6}
-.rooms{min-width:0;width:100%;background:var(--surface);border:1px solid var(--line);border-radius:10px;border-collapse:separate;border-spacing:0;font-size:.9rem}
-.rooms td{padding:7px 12px;border-bottom:1px solid var(--line);white-space:normal}
+figcaption{font-size:.76rem;letter-spacing:.02em;color:#5b6864;background:#fff;padding:8px 12px;border-top:1px solid #e6e9e5}
+.rooms{min-width:0;width:100%;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);border-collapse:separate;border-spacing:0;font-size:.9rem;overflow:hidden}
+.rooms td{padding:9px 14px;border-bottom:1px solid var(--line);white-space:normal}
 .rooms tr:last-child td{border-bottom:0}
-@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+footer{font-size:.8rem;color:var(--muted);border-top:1px solid var(--line);padding-top:18px;display:flex;flex-direction:column;gap:4px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
 </style>
 
 </head>
 <body>
 <div class="wrap">
-<header>
-  <span class="eyebrow">10년 공공임대 · 예비입주자 모집 · 주택관리번호 2026-000544</span>
-  <h1>대구테크노폴리스 4단지<br>모바일 신청 가이드</h1>
-  <p class="muted">신청 방법, 서류, 평면도, 분양전환 판단 포인트를 한 화면에 모았습니다.</p>
+<header class="hero">
+  <div class="hero-grid" aria-hidden="true"></div>
+  <p class="eyebrow">10년 공공임대 · 예비입주자 모집 · <span>주택관리번호 2026-000544</span></p>
+  <h1>대구테크노폴리스 4단지<span>예비입주 신청 가이드</span></h1>
+  <p class="lede">신청 방법, 서류, 평면도, 분양전환 판단 포인트를 한 화면에 모았습니다.</p>
+  <dl class="facts">
+    <div><dt>접수</dt><dd>10.27 – 10.29</dd></div>
+    <div><dt>예비자 모집</dt><dd>240세대</dd></div>
+    <div><dt>보증금</dt><dd>2,200만~</dd></div>
+    <div><dt>월 임대료</dt><dd>38만~</dd></div>
+  </dl>
+  <div class="dday" id="dday"><span class="dot"></span><b>인터넷·모바일 접수 10.27(화) 10:00 ~ 10.29(목) 17:00 · 현장접수 없음</b></div>
   <p class="disclaimer">개인 정리본입니다. 공식 기준은 LH 청약플러스의 2026.10.20자 입주자 모집공고문이며, 내용이 다르면 공고문이 우선합니다.</p>
 </header>
 
-<div class="dday" id="dday">
-  <b>접수 10.27(화) 10:00 ~ 10.29(목) 17:00</b>
-  <span>기간 중 24시간 신청 가능 · 현장접수 없음</span>
-</div>
+<nav class="toc" aria-label="목차"><div class="toc-in">
+  <a href="#sched">일정</a><a href="#elig">자격</a><a href="#apply">신청 방법</a><a href="#units">주택형</a><a href="#plans">평면도</a><a href="#papers">서류</a><a href="#own">내 집 마련</a><a href="#after">유의사항</a><a href="#contact">문의</a>
+</div></nav>
 
-<section>
+<section id="sched">
   <h2>일정</h2>
   <ol class="tl">
     <li><div class="when">~ 10.26(월)</div><div class="what">인증서 준비 · 앱 설치 · 청약연습</div><div class="muted">네이버·토스·KB·금융인증서도 됩니다</div></li>
@@ -132,32 +203,39 @@ figcaption{font-size:.78rem;color:#5b6865;padding:6px 10px;border-top:1px solid 
   </ol>
 </section>
 
-<section>
+<section id="elig">
   <h2>신청 자격 <small>3가지만 봅니다</small></h2>
   <div class="note ok">
     <ul>
       <li>2026.10.20 현재 <b>대구광역시 또는 경상북도</b> 거주</li>
       <li><b>만 19세 이상</b> (미성년 세대주는 자녀·동생 부양 시만)</li>
-      <li><b>세대원 전원 무주택</b> (분양권·입주권도 주택으로 봄)</li>
+      <li><b>세대원 전원 무주택</b> (분양권 등도 주택으로 봄)</li>
     </ul>
   </div>
-  <div class="note info">소득·자산·청약통장·세대주 여부는 보지 않습니다. 그래서 <b>저소득·한부모·다자녀 등의 가점이나 우선순위도 없습니다.</b> 순번은 주택형별 무작위 추첨입니다.</div>
+  <div class="note info">소득·자산·청약통장 가입·세대주 여부, 과거 당첨 사실은 보지 않습니다. 그래서 <b>저소득·한부모·다자녀 등의 가점이나 우선순위도 없습니다.</b> 순번은 주택형별 무작위 추첨입니다.</div>
+  <div class="note warn"><strong>신청할 수 없는 경우</strong> 이미 4개 단지 중 한 곳에 살고 있는 입주자와 세대원은 지금 사는 단지에 신청할 수 없습니다. 계약 후라도 적발되면 해지됩니다.</div>
 </section>
 
-<section>
-  <h2>모바일 신청 7단계</h2>
+<section id="apply">
+  <h2>모바일 신청 7단계 <small>공고문 순서</small></h2>
+  <div class="note info"><b>먼저 준비</b>
+    <ul>
+      <li>스마트폰에 ‘LH청약플러스’ 앱 설치 (아이폰은 앱스토어, 안드로이드는 Google Play)</li>
+      <li>스마트폰에 인증서 준비: 공동인증서(개인용) 또는 금융·네이버·토스·KB국민인증서. PC의 공동인증서는 LH청약플러스 → 고객서비스 → 공동인증센터 → 공동인증서 복사로 옮길 수 있음</li>
+    </ul>
+  </div>
   <ol class="steps">
-    <li><b>‘LH청약플러스’ 앱 설치</b><span>아이폰은 앱스토어, 안드로이드는 Google Play</span></li>
-    <li><b>인증서로 로그인</b><span>공동인증서(개인용) 또는 금융·네이버·토스·KB국민인증서</span></li>
-    <li><b>청약 → 임대주택 → 청약신청 누르기</b><span>‘대곡 호정포레스트, 풍경그린, 옥포 르상트레빌, 테크노4’ 공고 선택</span></li>
-    <li><b>지구(블록)와 주택형 선택</b><span>대구테크노A-10 → 51A / 59A / 59B 중 <u>하나만</u>. 신청 후 변경 불가</span></li>
-    <li><b>이용약관·개인정보 제공 동의</b></li>
-    <li><b>청약신청서 작성</b><span>세대원을 빠짐없이 입력. 배우자가 없으면 본인과 자녀만</span></li>
-    <li><b>내용 확인 후 제출</b><span>완료 화면 캡처해 두기. 마감 전까지 PC·앱 어디서든 수정·취소 가능</span></li>
+    <li><b>인증서 로그인</b></li>
+    <li><b>청약 → 임대주택 → 청약신청 클릭</b><span>‘대곡 호정포레스트, 풍경그린, 옥포 르상트레빌, 테크노4’ 공고 선택</span></li>
+    <li><b>지구(블록) 및 주택형 선택</b><span>대구테크노A-10 → 51A / 59A / 59B 중 <u>하나만</u>. 신청 후 변경 불가</span></li>
+    <li><b>이용약관 및 개인정보 제공 동의</b></li>
+    <li><b>청약신청서 작성</b><span>세대원을 빠짐없이 입력. 배우자가 세대 분리돼 있으면 배우자와 그 등본의 직계존·비속도 포함</span></li>
+    <li><b>신청내용 확인</b></li>
+    <li><b>청약신청서 제출</b><span>완료 화면 캡처해 두기. 마감 전까지 PC·앱 어디서든 수정·삭제 가능, 마감 후 변경 불가</span></li>
   </ol>
   <div class="note warn"><strong>꼭 지킬 것</strong>
     <ul>
-      <li>4개 단지 통틀어 <b>세대당 1건</b>. 가족 중 두 명이 넣거나 한 사람이 두 번 넣으면 <b>전부 무효</b></li>
+      <li>4개 단지 통틀어 <b>세대당 1건</b>. 세대원 2명 이상이 넣거나 한 사람이 두 번 넣어 한 곳이라도 뽑히면 <b>모두 부적격</b>. 단, 부부가 각각 넣어 둘 다 뽑히면 먼저 계약한 쪽만 유효(주택공급에 관한 규칙 제4조)</li>
       <li>신청 때 자격을 검사하지 않고 입력값으로 뽑습니다. 틀리게 입력해 뽑히면 나중에 탈락</li>
       <li>마감일 오후는 접속이 몰립니다. 27일이나 28일에 넣으세요</li>
       <li>앱의 ‘인터넷청약연습하기’로 내 폰에서 되는지 미리 확인 (안 되면 PC로)</li>
@@ -165,7 +243,7 @@ figcaption{font-size:.78rem;color:#5b6865;padding:6px 10px;border-top:1px solid 
   </div>
 </section>
 
-<section>
+<section id="units">
   <h2>테크노폴리스 4단지 주택형</h2>
   <p class="muted">달성군 유가읍 테크노상업로 111 · 9개동 922세대 · 2017.10 입주 · 개별가스난방</p>
   <div class="tbl">
@@ -178,8 +256,10 @@ figcaption{font-size:.78rem;color:#5b6865;padding:6px 10px;border-top:1px solid 
       </tbody>
     </table>
   </div>
-  <p class="muted" style="font-size:.85rem">보증금·월세 전환은 100만 원 단위, 현재 전환율(보증금 증액 6%, 감액 3.5%) 기준 예시입니다. 예: 51A를 보증금 2,000만으로 낮추면 월 약 38.6만. 전환율은 입주 시점 기준으로 바뀔 수 있고, 관리비는 별도입니다. 집은 기존 세대가 나간 상태 그대로(도배·장판 교체 없음) 공급됩니다.</p>
-  <div class="note info"><b>순번이 빈집 수 안쪽인지가 핵심입니다.</b> 51A는 98번, 59A는 12번, 59B는 8번까지가 지금 빈집 몫입니다. 그 뒤 순번은 해약이 나와야 차례가 오는데, 2027년 말 분양전환이 시작되면 대기 자격이 사라집니다.</div>
+  <p class="muted" style="font-size:.85rem">보증금·월세 전환은 100만 원 단위, 현재 전환율(보증금 증액 6%, 감액 3.5%) 기준 예시입니다. 예: 51A를 보증금 2,000만으로 낮추면 월 약 38.6만. 전환율은 입주 시점 기준으로 바뀔 수 있고, 관리비는 별도입니다. 기존 입주자가 나간 빈집을 추가 시설물 교체 없이 현 상태로 공급합니다. 도배·장판·주방기구 등이 최초 입주 때와 다르거나 일부 훼손돼 있을 수 있습니다.</p>
+  <div class="note info"><b>순번이 빈집 수 안쪽인지가 핵심입니다.</b> 51A는 98번, 59A는 12번, 59B는 8번까지가 지금 빈집 몫입니다. 현재 대기 중인 예비자는 0명입니다(공고문 표). 그 뒤 순번은 해약이 나와야 차례가 오는데, 분양전환이 시작되면 예비입주자 지위가 사라집니다. 빈집 수와 순번 비교는 정리자의 해석입니다.</div>
+  <div class="note warn"><strong>임대 계약기간 2년 미만</strong> 이 단지는 최초 입주지정기간 종료일(2017.12.08)이 속한 달의 다음 달 1일부터 10년 임대 후 분양전환됩니다. 이번에 계약하면 분양전환(2027년 12월 이후 예정)까지만 살 수 있고, 이 기간에 대해 이의를 제기할 수 없습니다.</div>
+  <p class="muted" style="font-size:.85rem">계약금·잔금(기본 조건): 51A 440만 + 1,760만, 59A·59B 600만 + 2,400만. 잔금은 입주지정기간(계약일부터 60일) 안에 냅니다. 임대조건은 동·층·향 차등이 없고 발코니 확장·외부샤시 비용이 포함돼 있습니다. 보증금은 이자 없이 맡깁니다.</p>
 </section>
 
 <section id="plans">
@@ -250,7 +330,7 @@ figcaption{font-size:.78rem;color:#5b6865;padding:6px 10px;border-top:1px solid 
   <p class="muted" style="font-size:.85rem">1평 ≈ 3.3㎡. 4층 이상 일부 세대는 발코니에 대피공간이 있어 발코니가 좁습니다. 입체도의 가구는 연출용이고 집에 포함되지 않습니다. 이번 공급은 빈집을 현 상태 그대로 주며, 동·호는 고를 수 없습니다.</p>
 </section>
 
-<section>
+<section id="papers">
   <h2>서류 체크리스트 <small>순번 발표 후 대상자만</small></h2>
   <p class="muted" style="font-size:.9rem">모든 서류는 <b>2026.10.20 이후 발급분</b>. 체크한 내용은 이 기기에만 저장됩니다.</p>
   <ul class="check" id="docs">
@@ -259,6 +339,8 @@ figcaption{font-size:.78rem;color:#5b6865;padding:6px 10px;border-top:1px solid 
     <li><label><input type="checkbox" id="d3"><span>주민등록표등본 (전부표기) 1통<br><small class="muted">세대원 주민번호, 세대구성 사유·일자, 전입·변동일 모두 나오게</small></span></label></li>
     <li><label><input type="checkbox" id="d4"><span>주민등록표초본 (전부표기) 1통<br><small class="muted">과거 주소 변동, 세대주와의 관계 모두 포함</small></span></label></li>
     <li><label><input type="checkbox" id="d5"><span>가족관계증명서 (상세) 1통 <span class="tag">해당자만</span><br><small class="muted">배우자가 없거나(미혼·이혼·사별) 등본에 배우자가 없으면 제출</small></span></label></li>
+    <li><label><input type="checkbox" id="d7"><span>배우자·세대원 주민등록표등본·초본 (전부표기) <span class="tag">해당자만</span><br><small class="muted">등본에 배우자가 없거나, 공고일(10.20) 이후 세대가 분리된 경우 공고일 당시 세대주·세대원 서류</small></span></label></li>
+    <li><label><input type="checkbox" id="d8"><span>국내거소신고증 / 외국인등록증(사실증명서) 사본 <span class="tag">해당자만</span><br><small class="muted">재외국민·외국인 세대원이 있는 경우</small></span></label></li>
     <li><label><input type="checkbox" id="d6"><span>등기우편으로 발송 · 영수증 보관<br><small class="muted">11.09~11.11, 11.11 소인까지</small></span></label></li>
   </ul>
   <div class="addr">
@@ -266,15 +348,16 @@ figcaption{font-size:.78rem;color:#5b6865;padding:6px 10px;border-top:1px solid 
     <button type="button" id="copyAddr">주소 복사</button>
   </div>
   <p class="muted" style="font-size:.85rem">본인·배우자 외 가족이 대신 보내면 대리 제출로 봅니다. 이때는 위임장, 인감도장, 인감증명서(또는 본인서명사실확인서), 양쪽 신분증이 추가로 필요합니다.</p>
+  <p class="muted" style="font-size:.85rem">직인이 없거나 팩스로 받은 서류는 인정하지 않습니다. 서류 미도달·누락 책임은 본인에게 있습니다. 주택 소유 등으로 부적격 통보를 받으면 통보일부터 7일 안에 소명자료를 내야 합니다.</p>
 </section>
 
-<section>
+<section id="own">
   <h2>내 집 마련으로 볼 때</h2>
   <div class="grid2">
-    <div class="card"><h3>가격은 할인가가 아닙니다</h3><p>분양전환가는 감정평가 2곳의 평균입니다. 시세에 가깝게 나옵니다. 근처 59㎡ 실거래는 2026년 1.5~1.6억 원대였습니다(참고용).</p></div>
+    <div class="card"><h3>가격은 할인가가 아닙니다</h3><p>분양전환가는 감정평가법인 2곳 평가액의 산술평균입니다(공고문). 감정평가라 시세에 가깝게 나올 가능성이 큽니다(추정). 근처 59㎡ 실거래는 2026년 1.5~1.6억 원대였습니다(참고용).</p></div>
     <div class="card"><h3>1년만 살아도 우선 분양 대상</h3><p>입주부터 분양전환 때까지 계속 거주하고 세대 전원이 무주택이면 됩니다. 감정가를 보고 그때 사거나 포기하면 됩니다.</p></div>
     <div class="card"><h3>대출 상환은 월세와 비슷한 수준</h3><p>1.5억에 사서 돌려받은 보증금 3,000만을 넣고 1.2억을 30년 대출(연 2.5~3.5% 가정)로 빌리면 월 약 47~54만 원입니다. 보증금을 미리 늘려두면 더 줄어듭니다.</p></div>
-    <div class="card"><h3>당첨 시 제한</h3><p>3년간 다른 분양주택(분양전환 공공임대 포함) 당첨 제한, 5년간 투기·청약과열지역 1순위 제한이 걸립니다.</p></div>
+    <div class="card"><h3>당첨 시 제한</h3><p>당첨자(계약자)와 세대원은 3년간 다른 분양주택(분양전환 공공임대 포함) 입주자로 선정될 수 없고, 당첨일(계약일)부터 5년간 투기과열지구·청약과열지역 1순위 청약이 제한됩니다.</p></div>
   </div>
   <div class="note warn"><strong>접수 전 전화로 확인할 것</strong>
     <ul>
@@ -284,7 +367,18 @@ figcaption{font-size:.78rem;color:#5b6865;padding:6px 10px;border-top:1px solid 
   </div>
 </section>
 
-<section>
+<section id="after">
+  <h2>계약·입주 후 유의사항</h2>
+  <ul class="check plain">
+    <li>계약자·입주자·임차인은 같은 사람이어야 하며, 다른 사람 명의나 공동명의 계약은 안 됩니다. 임대기간 중 양도·전대는 금지됩니다(근무·생업·질병치료 등 법정 예외 제외).</li>
+    <li>입주 후 본인이나 세대원이 다른 주택을 소유하거나 다른 임대주택에 당첨돼 입주하면 이 집을 비워야 합니다.</li>
+    <li>입주지정기간이 지나면 실제 거주와 관계없이 다음 날부터 임대료·관리비가 부과됩니다.</li>
+    <li>계약 후 해제·해지하면 위약금이 있고, 돌려받는 입주금에는 이자가 없습니다.</li>
+    <li>분양전환 자격: 입주일부터 분양전환 때까지 계속 거주하고, 그때 세대원 전원이 무주택이어야 합니다.</li>
+  </ul>
+</section>
+
+<section id="contact">
   <h2>문의처</h2>
   <div class="grid2">
     <div class="card"><h3>LH 콜센터</h3><p class="tel">1600-1004</p><p class="muted">공고·청약 일반</p></div>
@@ -328,6 +422,15 @@ figcaption{font-size:.78rem;color:#5b6865;padding:6px 10px;border-top:1px solid 
       });
     });
   });
+  // 목차: 지금 보고 있는 섹션 표시
+  var links={};document.querySelectorAll('.toc a').forEach(function(a){links[a.getAttribute('href').slice(1)]=a});
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){
+      if(e.isIntersecting){Object.keys(links).forEach(function(k){links[k].classList.toggle('on',k===e.target.id)});
+        var l=links[e.target.id];if(l&&l.scrollIntoView){var box=l.parentNode;box.scrollLeft=l.offsetLeft-16;}}
+    })},{rootMargin:'-30% 0px -60% 0px'});
+    Object.keys(links).forEach(function(k){var el=document.getElementById(k);if(el)io.observe(el)});
+  }
   // D-day
   var start=new Date('2026-10-27T10:00:00+09:00'), end=new Date('2026-10-29T17:00:00+09:00'), now=new Date();
   var el=document.getElementById('dday'), s=document.createElement('span'); s.className='num';
