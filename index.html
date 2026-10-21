@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>테크노4 예비입주 신청 가이드</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: 한 줄 세로 흐름(모바일 우선) — 상단 D-day 띠, 일정 타임라인, 단계 카드, 표, 체크리스트 */
+:root{
+  --bg:#f5f7f6; --surface:#ffffff; --fg:#1b2422; --muted:#5b6865; --line:#dbe2df;
+  --accent:#16675a; --accent-soft:#e2f0ec; --warn:#b4471f; --warn-soft:#fbeae2; --info-soft:#eef2f8;
+  --f-body:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --f-num:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#111816; --surface:#18211f; --fg:#e4ebe8; --muted:#9aa8a4; --line:#2b3633;
+  --accent:#5cc2ad; --accent-soft:#1b3330; --warn:#f08a62; --warn-soft:#3a2219; --info-soft:#1c2430; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#111816; --surface:#18211f; --fg:#e4ebe8; --muted:#9aa8a4; --line:#2b3633;
+  --accent:#5cc2ad; --accent-soft:#1b3330; --warn:#f08a62; --warn-soft:#3a2219; --info-soft:#1c2430; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15px;line-height:1.65;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 48px}
+.wrap{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+h1,h2,h3{text-wrap:balance;margin:0;line-height:1.3}
+h1{font-size:1.6rem;font-weight:700}
+h2{font-size:1.15rem;font-weight:700;display:flex;align-items:baseline;gap:8px}
+h2 small{font-weight:500;color:var(--muted);font-size:.8rem}
+p{margin:0}
+.num{font-family:var(--f-num);font-variant-numeric:tabular-nums}
+.muted{color:var(--muted)}
+.eyebrow{font-size:.75rem;letter-spacing:.06em;color:var(--accent);font-weight:600}
+section{display:flex;flex-direction:column;gap:12px}
+header{display:flex;flex-direction:column;gap:8px}
+.disclaimer{font-size:.8rem;color:var(--muted)}
+
+.dday{background:var(--accent);color:var(--bg);border-radius:12px;padding:14px 16px;display:flex;flex-wrap:wrap;gap:6px 16px;align-items:baseline}
+.dday b{font-size:1.25rem}
+.dday .num{font-weight:600}
+
+.tl{list-style:none;margin:0;padding:0;border-left:2px solid var(--line);display:flex;flex-direction:column;gap:14px}
+.tl li{position:relative;padding-left:18px}
+.tl li::before{content:"";position:absolute;left:-7px;top:.45em;width:12px;height:12px;border-radius:50%;background:var(--surface);border:2px solid var(--accent)}
+.tl li.hot::before{background:var(--accent)}
+.tl .when{font-family:var(--f-num);font-size:.85rem;color:var(--accent);font-weight:600}
+.tl .what{font-weight:600}
+
+.steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;counter-reset:s}
+.steps li{counter-increment:s;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px 12px 52px;position:relative}
+.steps li::before{content:counter(s);position:absolute;left:14px;top:12px;width:26px;height:26px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font-family:var(--f-num);font-weight:600;display:grid;place-items:center;font-size:.85rem}
+.steps b{display:block}
+.steps span{color:var(--muted);font-size:.9rem}
+
+.note{border-radius:10px;padding:12px 14px;font-size:.92rem}
+.note.warn{background:var(--warn-soft)}
+.note.warn strong{color:var(--warn)}
+.note.info{background:var(--info-soft)}
+.note.ok{background:var(--accent-soft)}
+.note ul{margin:6px 0 0;padding-left:1.1em}
+
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:520px;font-size:.9rem}
+th,td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+th{font-size:.78rem;color:var(--muted);font-weight:600;background:var(--bg)}
+tr:last-child td{border-bottom:0}
+td.num{font-family:var(--f-num)}
+.pill{display:inline-block;font-size:.72rem;padding:1px 8px;border-radius:99px;background:var(--accent-soft);color:var(--accent);font-weight:600;margin-left:4px}
+
+.check{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.check label{display:flex;gap:10px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px;cursor:pointer}
+.check input{margin-top:.3em;accent-color:var(--accent);width:18px;height:18px;flex:none}
+.check input:checked + span{color:var(--muted);text-decoration:line-through}
+.check .tag{font-size:.72rem;color:var(--warn);font-weight:600;margin-left:4px}
+.check label:focus-within{outline:2px solid var(--accent);outline-offset:2px}
+
+.addr{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:var(--surface);border:1px dashed var(--accent);border-radius:10px;padding:12px 14px}
+.addr p{flex:1 1 240px;min-width:0}
+button{font:inherit;font-size:.85rem;border:1px solid var(--accent);background:transparent;color:var(--accent);border-radius:8px;padding:6px 12px;cursor:pointer}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.card h3{font-size:.98rem}
+.card p{font-size:.9rem}
+.tel{font-family:var(--f-num);font-weight:600;color:var(--accent);user-select:all}
+a{color:var(--accent)}
+footer{font-size:.8rem;color:var(--muted);border-top:1px solid var(--line);padding-top:14px;display:flex;flex-direction:column;gap:4px}
+.seg{display:flex;gap:6px;flex-wrap:wrap}
+.seg button[aria-selected="true"]{background:var(--accent);color:var(--bg)}
+.plan{display:flex;flex-direction:column;gap:12px}
+.plan-sum{font-size:.95rem}
+.plan-body{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:12px;align-items:start}
+@media (max-width:560px){.plan-body{grid-template-columns:1fr}}
+figure{margin:0;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+figure img{display:block;width:100%;height:auto}
+figcaption{font-size:.78rem;color:#5b6865;padding:6px 10px;border-top:1px solid #e3e8e6}
+.rooms{min-width:0;width:100%;background:var(--surface);border:1px solid var(--line);border-radius:10px;border-collapse:separate;border-spacing:0;font-size:.9rem}
+.rooms td{padding:7px 12px;border-bottom:1px solid var(--line);white-space:normal}
+.rooms tr:last-child td{border-bottom:0}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+<header>
+  <span class="eyebrow">10년 공공임대 · 예비입주자 모집 · 주택관리번호 2026-000544</span>
+  <h1>대구테크노폴리스 4단지<br>모바일 신청 가이드</h1>
+  <p class="muted">신청 방법, 서류, 평면도, 분양전환 판단 포인트를 한 화면에 모았습니다.</p>
+  <p class="disclaimer">개인 정리본입니다. 공식 기준은 LH 청약플러스의 2026.10.20자 입주자 모집공고문이며, 내용이 다르면 공고문이 우선합니다.</p>
+</header>
+
+<div class="dday" id="dday">
+  <b>접수 10.27(화) 10:00 ~ 10.29(목) 17:00</b>
+  <span>기간 중 24시간 신청 가능 · 현장접수 없음</span>
+</div>
+
+<section>
+  <h2>일정</h2>
+  <ol class="tl">
+    <li><div class="when">~ 10.26(월)</div><div class="what">인증서 준비 · 앱 설치 · 청약연습</div><div class="muted">네이버·토스·KB·금융인증서도 됩니다</div></li>
+    <li class="hot"><div class="when">10.27(화) 10:00 ~ 10.29(목) 17:00</div><div class="what">모바일/PC 신청</div><div class="muted">마감 전까지 수정·삭제 가능, 마감 후 변경 불가</div></li>
+    <li><div class="when">11.02(월) 11:00</div><div class="what">컴퓨터 무작위 추첨</div></li>
+    <li class="hot"><div class="when">11.03(화) 16:00 이후</div><div class="what">순번 발표 — 직접 확인</div><div class="muted">문자 안내 없음. 앱 → 청약 → 청약결과확인 → 당첨/낙찰자명단</div></li>
+    <li class="hot"><div class="when">11.09(월) ~ 11.11(수)</div><div class="what">서류 등기우편 발송</div><div class="muted">11.11 우체국 소인까지 유효 · 일반우편·방문 불가</div></li>
+    <li><div class="when">이후 1개월 이상</div><div class="what">무주택 등 자격검증 → 순번대로 개별 연락 · 계약</div></li>
+    <li><div class="when">2027.12 이후</div><div class="what">만기 분양전환 시작 예정</div><div class="muted">이때 예비입주자 지위 소멸</div></li>
+  </ol>
+</section>
+
+<section>
+  <h2>신청 자격 <small>3가지만 봅니다</small></h2>
+  <div class="note ok">
+    <ul>
+      <li>2026.10.20 현재 <b>대구광역시 또는 경상북도</b> 거주</li>
+      <li><b>만 19세 이상</b> (미성년 세대주는 자녀·동생 부양 시만)</li>
+      <li><b>세대원 전원 무주택</b> (분양권·입주권도 주택으로 봄)</li>
+    </ul>
+  </div>
+  <div class="note info">소득·자산·청약통장·세대주 여부는 보지 않습니다. 그래서 <b>저소득·한부모·다자녀 등의 가점이나 우선순위도 없습니다.</b> 순번은 주택형별 무작위 추첨입니다.</div>
+</section>
+
+<section>
+  <h2>모바일 신청 7단계</h2>
+  <ol class="steps">
+    <li><b>‘LH청약플러스’ 앱 설치</b><span>아이폰은 앱스토어, 안드로이드는 Google Play</span></li>
+    <li><b>인증서로 로그인</b><span>공동인증서(개인용) 또는 금융·네이버·토스·KB국민인증서</span></li>
+    <li><b>청약 → 임대주택 → 청약신청 누르기</b><span>‘대곡 호정포레스트, 풍경그린, 옥포 르상트레빌, 테크노4’ 공고 선택</span></li>
+    <li><b>지구(블록)와 주택형 선택</b><span>대구테크노A-10 → 51A / 59A / 59B 중 <u>하나만</u>. 신청 후 변경 불가</span></li>
+    <li><b>이용약관·개인정보 제공 동의</b></li>
+    <li><b>청약신청서 작성</b><span>세대원을 빠짐없이 입력. 배우자가 없으면 본인과 자녀만</span></li>
+    <li><b>내용 확인 후 제출</b><span>완료 화면 캡처해 두기. 마감 전까지 PC·앱 어디서든 수정·취소 가능</span></li>
+  </ol>
+  <div class="note warn"><strong>꼭 지킬 것</strong>
+    <ul>
+      <li>4개 단지 통틀어 <b>세대당 1건</b>. 가족 중 두 명이 넣거나 한 사람이 두 번 넣으면 <b>전부 무효</b></li>
+      <li>신청 때 자격을 검사하지 않고 입력값으로 뽑습니다. 틀리게 입력해 뽑히면 나중에 탈락</li>
+      <li>마감일 오후는 접속이 몰립니다. 27일이나 28일에 넣으세요</li>
+      <li>앱의 ‘인터넷청약연습하기’로 내 폰에서 되는지 미리 확인 (안 되면 PC로)</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>테크노폴리스 4단지 주택형</h2>
+  <p class="muted">달성군 유가읍 테크노상업로 111 · 9개동 922세대 · 2017.10 입주 · 개별가스난방</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>주택형</th><th>현재 빈집</th><th>예비자 모집</th><th>기본 보증금 / 월세</th><th>보증금 최대 시</th><th>보증금 최소 시</th></tr></thead>
+      <tbody>
+        <tr><td>51A <span class="muted">(51.98㎡)</span></td><td class="num">98호</td><td class="num">200명</td><td class="num">2,200만 / 38만</td><td class="num">6,700만 / 15.5만</td><td class="num">1,000만 / 41.5만</td></tr>
+        <tr><td>59A <span class="muted">(59.91㎡)</span></td><td class="num">12호</td><td class="num">25명</td><td class="num">3,000만 / 43만</td><td class="num">8,100만 / 17.5만</td><td class="num">1,200만 / 48.25만</td></tr>
+        <tr><td>59B <span class="muted">(59.93㎡)</span></td><td class="num">8호</td><td class="num">15명</td><td class="num">3,000만 / 43만</td><td class="num">8,100만 / 17.5만</td><td class="num">1,200만 / 48.25만</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="muted" style="font-size:.85rem">보증금·월세 전환은 100만 원 단위, 현재 전환율(보증금 증액 6%, 감액 3.5%) 기준 예시입니다. 예: 51A를 보증금 2,000만으로 낮추면 월 약 38.6만. 전환율은 입주 시점 기준으로 바뀔 수 있고, 관리비는 별도입니다. 집은 기존 세대가 나간 상태 그대로(도배·장판 교체 없음) 공급됩니다.</p>
+  <div class="note info"><b>순번이 빈집 수 안쪽인지가 핵심입니다.</b> 51A는 98번, 59A는 12번, 59B는 8번까지가 지금 빈집 몫입니다. 그 뒤 순번은 해약이 나와야 차례가 오는데, 2027년 말 분양전환이 시작되면 대기 자격이 사라집니다.</div>
+</section>
+
+<section id="plans">
+  <h2>평형별 평면도 <small>팸플릿 발췌</small></h2>
+  <div class="seg" role="tablist" aria-label="주택형 선택">
+    <button type="button" role="tab" id="tab-51a" aria-selected="true" aria-controls="pl-51a">51A</button>
+    <button type="button" role="tab" id="tab-59a" aria-selected="false" aria-controls="pl-59a">59A</button>
+    <button type="button" role="tab" id="tab-59b" aria-selected="false" aria-controls="pl-59b">59B</button>
+  </div>
+
+  <div class="plan" id="pl-51a" role="tabpanel" aria-labelledby="tab-51a">
+    <p class="plan-sum"><b>방 2 · 욕실 1</b> · 전용 51.98㎡ · 572세대 · 주방이 넓고 방 두 개가 비슷한 크기. 2~3인 가구에 맞음</p>
+    <div class="plan-body">
+      <figure><img src="site/51a-plan.jpg" alt="51A 평면도: 현관 옆 주방·식당, 거실과 침실1이 남쪽, 침실2와 욕실이 북쪽" loading="lazy"><figcaption>평면도 (치수 mm)</figcaption></figure>
+      <table class="rooms"><tbody>
+        <tr><td>거실</td><td class="num">16.65㎡</td></tr>
+        <tr><td>주방/식당</td><td class="num">10.20㎡</td></tr>
+        <tr><td>침실1</td><td class="num">10.62㎡</td></tr>
+        <tr><td>침실2</td><td class="num">8.62㎡</td></tr>
+        <tr><td>욕실(공용)</td><td class="num">3.61㎡</td></tr>
+        <tr><td>현관</td><td class="num">2.28㎡</td></tr>
+        <tr><td>발코니 계 <span class="muted">(서비스)</span></td><td class="num">20.67㎡</td></tr>
+      </tbody></table>
+    </div>
+    <figure class="iso"><img src="site/51a-3d.jpg" alt="51A 가구 배치 입체도" loading="lazy"><figcaption>가구 배치 입체도</figcaption></figure>
+  </div>
+
+  <div class="plan" id="pl-59a" role="tabpanel" aria-labelledby="tab-59a" hidden>
+    <p class="plan-sum"><b>방 3 · 욕실 2</b> · 전용 59.91㎡ · 266세대 · 방 세 개가 고르게 나뉘고 드레스룸이 있음. 아이 둘 가구에 맞음</p>
+    <div class="plan-body">
+      <figure><img src="site/59a-plan.jpg" alt="59A 평면도: 거실 양옆으로 침실1·침실2, 북쪽에 침실3과 주방, 부부욕실과 드레스룸" loading="lazy"><figcaption>평면도 (치수 mm)</figcaption></figure>
+      <table class="rooms"><tbody>
+        <tr><td>거실</td><td class="num">18.21㎡</td></tr>
+        <tr><td>주방/식당</td><td class="num">8.49㎡</td></tr>
+        <tr><td>침실1</td><td class="num">8.42㎡</td></tr>
+        <tr><td>침실2</td><td class="num">8.69㎡</td></tr>
+        <tr><td>침실3</td><td class="num">6.04㎡</td></tr>
+        <tr><td>욕실1(공용)</td><td class="num">3.48㎡</td></tr>
+        <tr><td>욕실2(부부)</td><td class="num">1.29㎡</td></tr>
+        <tr><td>드레스룸</td><td class="num">2.92㎡</td></tr>
+        <tr><td>현관</td><td class="num">2.37㎡</td></tr>
+        <tr><td>발코니 계 <span class="muted">(서비스)</span></td><td class="num">26.50㎡</td></tr>
+      </tbody></table>
+    </div>
+    <figure class="iso"><img src="site/59a-3d.jpg" alt="59A 가구 배치 입체도" loading="lazy"><figcaption>가구 배치 입체도</figcaption></figure>
+  </div>
+
+  <div class="plan" id="pl-59b" role="tabpanel" aria-labelledby="tab-59b" hidden>
+    <p class="plan-sum"><b>방 3 · 욕실 2</b> · 전용 59.93㎡ · 84세대 · 거실과 안방이 크고, 작은방 둘과 주방은 작음</p>
+    <div class="plan-body">
+      <figure><img src="site/59b-plan.jpg" alt="59B 평면도: 가로로 긴 구조, 한쪽 끝에 침실1과 부부욕실, 다른 쪽에 침실2·침실3" loading="lazy"><figcaption>평면도 (치수 mm)</figcaption></figure>
+      <table class="rooms"><tbody>
+        <tr><td>거실</td><td class="num">20.65㎡</td></tr>
+        <tr><td>주방/식당</td><td class="num">4.94㎡</td></tr>
+        <tr><td>침실1</td><td class="num">10.94㎡</td></tr>
+        <tr><td>침실2</td><td class="num">5.87㎡</td></tr>
+        <tr><td>침실3</td><td class="num">4.70㎡</td></tr>
+        <tr><td>욕실1(공용)</td><td class="num">3.65㎡</td></tr>
+        <tr><td>욕실2(부부)</td><td class="num">3.01㎡</td></tr>
+        <tr><td>드레스룸</td><td class="num">3.75㎡</td></tr>
+        <tr><td>현관</td><td class="num">2.42㎡</td></tr>
+        <tr><td>발코니 계 <span class="muted">(서비스)</span></td><td class="num">27.22㎡</td></tr>
+      </tbody></table>
+    </div>
+    <figure class="iso"><img src="site/59b-3d.jpg" alt="59B 가구 배치 입체도" loading="lazy"><figcaption>가구 배치 입체도</figcaption></figure>
+  </div>
+
+  <p class="muted" style="font-size:.85rem">1평 ≈ 3.3㎡. 4층 이상 일부 세대는 발코니에 대피공간이 있어 발코니가 좁습니다. 입체도의 가구는 연출용이고 집에 포함되지 않습니다. 이번 공급은 빈집을 현 상태 그대로 주며, 동·호는 고를 수 없습니다.</p>
+</section>
+
+<section>
+  <h2>서류 체크리스트 <small>순번 발표 후 대상자만</small></h2>
+  <p class="muted" style="font-size:.9rem">모든 서류는 <b>2026.10.20 이후 발급분</b>. 체크한 내용은 이 기기에만 저장됩니다.</p>
+  <ul class="check" id="docs">
+    <li><label><input type="checkbox" id="d1"><span>신청인 신분증 사본</span></label></li>
+    <li><label><input type="checkbox" id="d2"><span>개인정보수집·이용 및 제3자 제공 동의서 <span class="tag">필수</span><br><small class="muted">공고 첨부 양식. 본인과 세대원 전원 서명. 만 14세 이상 자녀는 직접 서명, 14세 미만은 보호자가 서명</small></span></label></li>
+    <li><label><input type="checkbox" id="d3"><span>주민등록표등본 (전부표기) 1통<br><small class="muted">세대원 주민번호, 세대구성 사유·일자, 전입·변동일 모두 나오게</small></span></label></li>
+    <li><label><input type="checkbox" id="d4"><span>주민등록표초본 (전부표기) 1통<br><small class="muted">과거 주소 변동, 세대주와의 관계 모두 포함</small></span></label></li>
+    <li><label><input type="checkbox" id="d5"><span>가족관계증명서 (상세) 1통 <span class="tag">해당자만</span><br><small class="muted">배우자가 없거나(미혼·이혼·사별) 등본에 배우자가 없으면 제출</small></span></label></li>
+    <li><label><input type="checkbox" id="d6"><span>등기우편으로 발송 · 영수증 보관<br><small class="muted">11.09~11.11, 11.11 소인까지</small></span></label></li>
+  </ul>
+  <div class="addr">
+    <p><b>보낼 곳</b> (우 42955)<br><span id="addrText">대구광역시 달성군 화원읍 사문진로 441, 5층 LH 대구서부권지사 공공임대 공급 담당자 앞</span></p>
+    <button type="button" id="copyAddr">주소 복사</button>
+  </div>
+  <p class="muted" style="font-size:.85rem">본인·배우자 외 가족이 대신 보내면 대리 제출로 봅니다. 이때는 위임장, 인감도장, 인감증명서(또는 본인서명사실확인서), 양쪽 신분증이 추가로 필요합니다.</p>
+</section>
+
+<section>
+  <h2>내 집 마련으로 볼 때</h2>
+  <div class="grid2">
+    <div class="card"><h3>가격은 할인가가 아닙니다</h3><p>분양전환가는 감정평가 2곳의 평균입니다. 시세에 가깝게 나옵니다. 근처 59㎡ 실거래는 2026년 1.5~1.6억 원대였습니다(참고용).</p></div>
+    <div class="card"><h3>1년만 살아도 우선 분양 대상</h3><p>입주부터 분양전환 때까지 계속 거주하고 세대 전원이 무주택이면 됩니다. 감정가를 보고 그때 사거나 포기하면 됩니다.</p></div>
+    <div class="card"><h3>대출 상환은 월세와 비슷한 수준</h3><p>1.5억에 사서 돌려받은 보증금 3,000만을 넣고 1.2억을 30년 대출(연 2.5~3.5% 가정)로 빌리면 월 약 47~54만 원입니다. 보증금을 미리 늘려두면 더 줄어듭니다.</p></div>
+    <div class="card"><h3>당첨 시 제한</h3><p>3년간 다른 분양주택(분양전환 공공임대 포함) 당첨 제한, 5년간 투기·청약과열지역 1순위 제한이 걸립니다.</p></div>
+  </div>
+  <div class="note warn"><strong>접수 전 전화로 확인할 것</strong>
+    <ul>
+      <li><b>LH</b>: 분양전환을 포기하면 취약계층 임대 연장(2018년 대책상 최대 8년)이 이 단지에 적용되는지, 주택도시기금 대환(세대당 5,500만) 금리와 조건</li>
+      <li><b>행정복지센터</b>: 복지 급여(주거급여, 한부모·차상위 지원 등)를 받고 있다면, 집을 소유했을 때 어떻게 달라지는지 모의 산정</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>문의처</h2>
+  <div class="grid2">
+    <div class="card"><h3>LH 콜센터</h3><p class="tel">1600-1004</p><p class="muted">공고·청약 일반</p></div>
+    <div class="card"><h3>LH 대구서부권주거복지지사</h3><p class="tel">1670-0003</p><p class="muted">서류·계약 · 달성군 화원읍 사문진로 441, 5층</p></div>
+    <div class="card"><h3>순번 확인 ARS</h3><p class="tel">1661-7700</p><p class="muted">11.03(화) 16:00 이후</p></div>
+    <div class="card"><h3>LH 청약플러스</h3><p><a href="https://apply.lh.or.kr" target="_blank" rel="noopener">apply.lh.or.kr</a></p><p class="muted">공고문·팸플릿·동의서 양식 다운로드</p></div>
+  </div>
+</section>
+
+<footer>
+  <p>출처: 대구시 달서구·달성군 10년 공공임대리츠 예비입주자 모집공고문(2026.10.20), LH 청약플러스 공고 페이지. 시세·대출 수치는 추정치입니다.</p>
+  <p>정리일 2026.10.21</p>
+</footer>
+</div>
+
+<script>
+(function(){
+  var KEY='techno4-docs';
+  var state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){}
+  document.querySelectorAll('#docs input').forEach(function(cb){
+    if(state[cb.id]) cb.checked=true;
+    cb.addEventListener('change',function(){
+      state[cb.id]=cb.checked;
+      try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}
+    });
+  });
+  var btn=document.getElementById('copyAddr');
+  btn.addEventListener('click',function(){
+    var t='(우 42955) '+document.getElementById('addrText').textContent;
+    var done=function(){btn.textContent='복사됨';setTimeout(function(){btn.textContent='주소 복사'},1600)};
+    var fallback=function(){var r=document.createRange();r.selectNodeContents(document.getElementById('addrText'));var s=getSelection();s.removeAllRanges();s.addRange(r);btn.textContent='선택됨 · 길게 눌러 복사'};
+    try{navigator.clipboard.writeText(t).then(done,fallback)}catch(e){fallback()}
+  });
+  var tabs=document.querySelectorAll('.seg [role=tab]');
+  tabs.forEach(function(t){
+    t.addEventListener('click',function(){
+      tabs.forEach(function(o){
+        var on=o===t; o.setAttribute('aria-selected',on);
+        document.getElementById(o.getAttribute('aria-controls')).hidden=!on;
+      });
+    });
+  });
+  // D-day
+  var start=new Date('2026-10-27T10:00:00+09:00'), end=new Date('2026-10-29T17:00:00+09:00'), now=new Date();
+  var el=document.getElementById('dday'), s=document.createElement('span'); s.className='num';
+  if(now<start){var d=Math.ceil((start-now)/864e5);s.textContent='접수 시작까지 D-'+d;}
+  else if(now<=end){s.textContent='지금 접수 중';}
+  else{s.textContent='접수 마감 · 11.03(화) 16:00 순번 발표';}
+  el.appendChild(s);
+})();
+</script>
+
+</body>
+</html>
