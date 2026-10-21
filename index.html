@@ -100,9 +100,20 @@ section > h2::before{content:"";display:block;flex-basis:100%;height:1px;backgro
 .steps li{counter-increment:s;padding:14px 16px 14px 60px;position:relative;border-top:1px solid var(--line)}
 .steps li:first-child{border-top:0}
 .steps li::before{content:counter(s);position:absolute;left:16px;top:13px;width:28px;height:28px;border-radius:50%;border:1px solid var(--accent);color:var(--accent);font-family:var(--f-display);font-weight:700;display:grid;place-items:center;font-size:.9rem}
-.steps b{display:block}
+.steps li > b{display:block}
+.steps span b{display:inline}
 .steps span{color:var(--muted);font-size:.9rem}
 
+.phase{display:flex;flex-direction:column;gap:10px}
+.phase-head{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px}
+.phase-head h3{font-family:var(--f-display);font-size:1.08rem;font-weight:700}
+.chip{font-size:.78rem;font-weight:600;padding:2px 10px;border-radius:99px;border:1px solid var(--line);color:var(--muted);background:var(--surface);font-variant-numeric:tabular-nums}
+.chip.hot{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
+.path{display:inline;font-size:.84rem;font-weight:600;color:var(--fg);background:var(--surface-2);border:1px solid var(--line);border-radius:6px;padding:1px 6px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.code{font-variant-numeric:tabular-nums;font-weight:600;color:var(--fg);letter-spacing:.01em}
+.steps span{display:block}
+.steps span span{display:inline}
+.steps span b{color:var(--fg)}
 /* 안내 상자 */
 .note{border-radius:var(--r);padding:14px 16px;font-size:.93rem;border:1px solid transparent}
 .note.warn{background:var(--warn-soft);border-color:color-mix(in srgb,var(--warn) 22%,transparent)}
@@ -217,28 +228,49 @@ footer{font-size:.8rem;color:var(--muted);border-top:1px solid var(--line);paddi
 </section>
 
 <section id="apply">
-  <h2>모바일 신청 7단계 <small>공고문 순서</small></h2>
-  <div class="note info"><b>먼저 준비</b>
-    <ul>
-      <li>스마트폰에 ‘LH청약플러스’ 앱 설치 (아이폰은 앱스토어, 안드로이드는 Google Play)</li>
-      <li>스마트폰에 인증서 준비: 공동인증서(개인용) 또는 금융·네이버·토스·KB국민인증서. PC의 공동인증서는 LH청약플러스 → 고객서비스 → 공동인증센터 → 공동인증서 복사로 옮길 수 있음</li>
-    </ul>
+  <h2>모바일 신청 방법 <small>공고문 + LH 청약플러스 신청 절차 안내 기준</small></h2>
+
+  <div class="phase">
+    <div class="phase-head"><h3>준비</h3><span class="chip">~ 10.26(월)까지</span></div>
+    <ol class="steps">
+      <li><b>‘LH청약플러스’ 앱 설치</b><span>아이폰은 App Store, 안드로이드는 Google Play에서 ‘LH청약플러스’ 검색. 앱이 안 맞으면 휴대폰 브라우저로 apply.lh.or.kr에 접속해도 같은 절차입니다.</span></li>
+      <li><b>인증서 준비 (둘 중 하나)</b><span><b>민간인증서</b>: 금융인증서, 네이버, 토스, KB국민인증서 중 하나. 이미 쓰고 있다면 따로 준비할 것이 없어 가장 간단합니다.<br><b>공동인증서</b>: 개인용만 가능하고, 은행 인터넷뱅킹용도 됩니다. 단체 명의 등 특수 목적 인증서는 안 됩니다. PC에 있는 인증서는 <span class="path">고객서비스 › 공동인증센터 › 공동인증서 복사</span>로 휴대폰에 옮깁니다.</span></li>
+      <li><b>청약연습하기로 미리 해보기</b><span><span class="path">청약 › 임대주택 › 청약연습하기 › 건설임대 › 인터넷 청약연습하기</span>. 실제 신청과 화면·절차가 같습니다. 신청 1~2일 전에, 신청할 그 휴대폰으로 끝까지 되는지 확인하세요. 안 되는 기기도 있습니다.</span></li>
+      <li><b>입력할 정보 모아두기</b><span>주민등록표등본을 보고 세대원 이름, 주민등록번호, 신청자와의 관계를 정리해 두세요. 배우자가 세대 분리돼 있으면 배우자 등본도 필요합니다. 주소와 휴대폰 번호도 준비합니다. 이번 공고는 청약통장·소득·자산을 보지 않습니다.</span></li>
+    </ol>
   </div>
-  <ol class="steps">
-    <li><b>인증서 로그인</b></li>
-    <li><b>청약 → 임대주택 → 청약신청 클릭</b><span>‘대곡 호정포레스트, 풍경그린, 옥포 르상트레빌, 테크노4’ 공고 선택</span></li>
-    <li><b>지구(블록) 및 주택형 선택</b><span>대구테크노A-10 → 51A / 59A / 59B 중 <u>하나만</u>. 신청 후 변경 불가</span></li>
-    <li><b>이용약관 및 개인정보 제공 동의</b></li>
-    <li><b>청약신청서 작성</b><span>세대원을 빠짐없이 입력. 배우자가 세대 분리돼 있으면 배우자와 그 등본의 직계존·비속도 포함</span></li>
-    <li><b>신청내용 확인</b></li>
-    <li><b>청약신청서 제출</b><span>완료 화면 캡처해 두기. 마감 전까지 PC·앱 어디서든 수정·삭제 가능, 마감 후 변경 불가</span></li>
-  </ol>
+
+  <div class="phase">
+    <div class="phase-head"><h3>신청 당일 화면 순서</h3><span class="chip hot">10.27(화) 10:00 ~ 10.29(목) 17:00</span></div>
+    <ol class="steps">
+      <li><b>로그인</b><span>앱 실행 → 로그인 → 준비한 인증서 선택 → 인증</span></li>
+      <li><b>공고 찾기</b><span><span class="path">청약 › 임대주택 › 청약신청</span>에서 공고명 <b>‘대곡 호정포레스트, 풍경그린, 옥포 르상트레빌, 테크노4 10년공공임대주택 예비입주자 모집’</b> 선택</span></li>
+      <li><b>지구(블록)와 주택형 선택</b><span>지구: <b>대구테크노A-10(공임리츠)</b><br>주택형: <span class="code">051.9800A</span> (51A) · <span class="code">059.9100A</span> (59A) · <span class="code">059.9300B</span> (59B) 중 <u>하나만</u> 고릅니다. 4개 단지 중 다른 지구를 함께 고르면 중복입니다.</span></li>
+      <li><b>공급 구분 선택</b><span>이번 공고는 <b>무순위</b> 한 가지입니다(공고 페이지 공급일정 기준). 다른 선택지가 보이면 고르지 말고 1600-1004에 확인하세요.</span></li>
+      <li><b>필수 확인사항 확인</b><span>신청 전 확인해야 할 안내를 끝까지 읽고 확인을 누릅니다.</span></li>
+      <li><b>개인정보 수집·활용, 시스템 이용약관 동의</b></li>
+      <li><b>청약신청서 작성</b><span>인적사항, 주소, 연락처, 세대구성원을 입력합니다. <b>등본과 한 글자도 다르지 않게</b> 입력하세요. LH는 입력값만 보고 순번을 뽑고, 나중에 낸 서류와 다르면 당첨이 무효가 될 수 있습니다. 배우자가 세대 분리돼 있으면 배우자와 그 등본의 직계존·비속도 넣습니다.</span></li>
+      <li><b>서약서 동의 → 입력 내용 확인 → 제출</b><span>고칠 것이 있으면 [청약신청서 내용수정], 없으면 [청약신청서 제출]. 완료 화면은 <b>캡처해서 보관</b>하세요.</span></li>
+    </ol>
+  </div>
+
+  <div class="phase">
+    <div class="phase-head"><h3>신청 후</h3><span class="chip">마감 전 ~ 11.03(화)</span></div>
+    <ol class="steps">
+      <li><b>제대로 접수됐는지 확인</b><span><span class="path">청약신청 내역조회</span>에서 조회·수정·삭제할 수 있습니다. 마감(10.29 17:00) 뒤에는 조회만 됩니다.</span></li>
+      <li><b>주택형을 바꾸고 싶을 때</b><span>수정 화면에서 주택형은 바꿀 수 없습니다. LH 안내는 ‘먼저 신청을 삭제한 뒤 다른 주택형으로 다시 신청’입니다. 공고문은 ‘신청 후 주택형 변경 불가’라고 적고 있으니, 바꿔야 한다면 마감 전에 1600-1004로 먼저 확인하세요.</span></li>
+      <li><b>순번 발표 직접 확인</b><span>11.03(화) 16:00 이후 <span class="path">청약 › 청약결과확인 › 당첨/낙찰자 명단</span>, 또는 ARS 1661-7700. 따로 연락이 오지 않습니다.</span></li>
+      <li><b>서류제출 대상자면 등기우편 발송</b><span>11.09(월)~11.11(수), 11.11 소인까지. 아래 서류 체크리스트를 보세요.</span></li>
+    </ol>
+  </div>
+
   <div class="note warn"><strong>꼭 지킬 것</strong>
     <ul>
       <li>4개 단지 통틀어 <b>세대당 1건</b>. 세대원 2명 이상이 넣거나 한 사람이 두 번 넣어 한 곳이라도 뽑히면 <b>모두 부적격</b>. 단, 부부가 각각 넣어 둘 다 뽑히면 먼저 계약한 쪽만 유효(주택공급에 관한 규칙 제4조)</li>
       <li>신청 때 자격을 검사하지 않고 입력값으로 뽑습니다. 틀리게 입력해 뽑히면 나중에 탈락</li>
-      <li>마감일 오후는 접속이 몰립니다. 27일이나 28일에 넣으세요</li>
-      <li>앱의 ‘인터넷청약연습하기’로 내 폰에서 되는지 미리 확인 (안 되면 PC로)</li>
+      <li>접수기간 중 24시간 신청할 수 있지만, 마감 직전에는 접속이 몰려 장애가 날 수 있습니다. 27~28일에 넣으세요</li>
+      <li>모바일이 장애로 멈추면 PC(apply.lh.or.kr)로 신청할 수 있습니다. PC에서 넣은 신청은 휴대폰에서, 휴대폰에서 넣은 신청은 PC에서 수정·취소할 수 있습니다</li>
+      <li>Wi-Fi에서 하면 데이터 요금을 아낄 수 있습니다</li>
     </ul>
   </div>
 </section>
